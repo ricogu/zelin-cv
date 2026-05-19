@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Build LaTeX Document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: zelin-cv.tex
+
+      - name: Clean up auxiliary files
+        run: rm -f *.aux *.log *.out *.toc *.fls *.fdb_latexmk
+
+      - name: Prepare deploy directory
+        run: |
+          mkdir -p _site
+          touch _site/.nojekyll
+          cp zelin-cv.pdf _site/zelin-cv.pdf
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
