@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper,sans]{moderncv}
 
-% moderncv themes
-\moderncvstyle{banking}
+% moderncv themes — classic supports photo; black = conservative/professional
+\moderncvstyle{classic}
 \moderncvcolor{black}
 
 % character encoding
@@ -12,30 +12,20 @@
 \usepackage[scale=0.93]{geometry}
 \raggedbottom
 
-% tighter bullet spacing
+% tighter bullet spacing + fix bullet marker to filled circle
 \usepackage{enumitem}
-\setlist[itemize]{nosep, leftmargin=*, topsep=1pt}
-
-% reduce section spacing
-\usepackage{etoolbox}
-\patchcmd{\section}{\vspace*{2.5ex}}{\vspace*{0.8ex}}{}{}
-% shrink space after cventry
-\usepackage{xpatch}
-\xpatchcmd{\cventry}{\\\smallskip}{\relax}{}{}
-
-% tighter title block
-\patchcmd{\makecvtitle}{\recomputecvlengths}{\recomputecvlengths\setlength{\parskip}{0pt}}{}{}
+\setlist[itemize]{nosep, leftmargin=*, topsep=1pt, label=\textbullet}
 
 % personal data
 \name{Zelin}{Fan}
 \address{Karl-Breu-Weg 20}{81829 München, Deutschland}
 \phone[mobile]{+49 176 81060423}
 \email{fzelin56@gmail.com}
-\photo[52pt][0.4pt]{zelin}
+\photo[64pt][0.4pt]{zelin}
 
 \begin{document}
 	\makecvtitle
-	\vspace{-10pt}
+	\vspace{-8pt}
 
 	% ── PROFIL ──────────────────────────────────────────────────────────────────
 	\section{Profil}
@@ -45,7 +35,6 @@
 		Kassenführung und SAP-basierten Hotelsystemen --- service-orientiert, diskret und
 		DSGVO-konform.
 	}
-	\vspace{-2pt}
 
 	% ── SPRACHEN ────────────────────────────────────────────────────────────────
 	\section{Sprachkompetenz}
@@ -55,7 +44,6 @@
 		\textbf{Englisch} (verhandlungssicher, IELTS~7.5) \quad\textbullet\quad
 		Französisch \& Koreanisch (Grundkenntnisse)
 	}
-	\vspace{-2pt}
 
 	% ── BERUFSERFAHRUNG ─────────────────────────────────────────────────────────
 	\section{Berufserfahrung}
